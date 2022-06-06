@@ -78,7 +78,7 @@ def get_filters():
 
 
 def load_data(city, month, day):
-    """
+	"""
     Loads data for the specified city and filters by month and day if applicable.
 
     Args:
@@ -89,30 +89,32 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
 
-    # load data file into a dataframe
-    df = pd.read_csv(CITY_DATA[city.title()])
+                                     
+                                             
 
-    # convert the Start Time column to datetime
-    df['Start Time'] = pd.to_datetime(df['Start Time'])
+	# load data file into a dataframe
+	df = pd.read_csv(CITY_DATA[city.title()])
 
-    # extract month and day of week from Start Time to create new columns
-    df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.day_name()
+	# convert the Start Time column to datetime
+                                           
+	df['Start Time'] = pd.to_datetime(df['Start Time'])
 
-    # filter by month if applicable
-    if month.title() != 'all':
-        # use the index of the months list to get the corresponding int
-        month = months.index(month.title()) + 1
+	# extract month and day of week from Start Time to create new columns
+	df['month'] = df['Start Time'].dt.month_name()
+	df['day_of_week'] = df['Start Time'].dt.day_name()
+                                               
 
-        # filter by month to create the new dataframe
-        df = df[df['month'] == month]
+	# filter by month if applicable
+	if month.title() != 'all':
+		# filter by month to create the new dataframe
+		df = df[df['month'] == month.title()]
 
-    # filter by day of week if applicable
-    if day.title() != 'all':
-        # filter by day of week to create the new dataframe
-        df = df[df['day_of_week'] == day.title()]
+	# filter by day of week if applicable
+	if day.title() != 'all':
+		# filter by day of week to create the new dataframe
+		df = df[df['day_of_week'] == day.title()]
 
-    return df
+	return df
 
 
 def time_stats(df):
