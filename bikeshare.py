@@ -205,8 +205,6 @@ def user_stats(df):
 
 
 def view_raw_data(df):
-lay all the columns in your dataframe when printing.
-
     """
     Display raw data if you want to see.
     """
